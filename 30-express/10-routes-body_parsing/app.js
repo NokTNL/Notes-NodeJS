@@ -10,7 +10,9 @@ const app = express();
 //  - `extended: true` is just an option you need to provide for parsing rich objects/arrays
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// `app.use` has a route matcher form. The callback will only be run when it matches the pattern you provided. If the route doesn't match, it will jump to middleware next in line.
+// `app.use` has a ROUTE MATCHER form. The callback will only be run when it matches the pattern you provided. If the route doesn't match, it will jump to middleware next in line.
+// !!! `app.use` performs match from the start of the URL, but ignore the remaining part of the path. So "/product" will match "/product", "/product/123", "product/123/id", etc.
+// If you don't provide a path, it defaults to "/" (which matches ANYTHING)
 app.use("/add-product", (req, res, next) => {
   // This form will send the data to the `POST /product` route
   //  - Note that on submission, this will actually be sending the URL `/product?product=xxxxxxx`
@@ -21,15 +23,17 @@ app.use("/add-product", (req, res, next) => {
   // !!! NOTE: if you use the middleware as a route matcher, you DON'T need to call `next()`, because you want it to match only one route pattern anyway.
 });
 
-// Alternative to `app.use` (which will match any HTTP verbs), you can use `app.use` to just match a POST request:
-app.get("/product", (req, res) => {
+// Alternative to `app.use` (which will match any HTTP verbs), we can use ROUTING METHODS, e.g. `app.get`, `app.post` ..., which will just match the specified HTTP method.
+// !!! In routing methods, unlike `app.use`, the path match is EXACT. So `app.get("/")` only matches `GET /`, but not `GET /product`.
+// - However, you can pass in Regexp-like expressions and RegExp for matching. See http://expressjs.com/en/guide/routing.html and https://expressjs.com/en/5x/api.html#path-examples for more explanations.
+app.post("/product", (req, res) => {
   console.log(req.body);
   // Instead of setting status code to redirect, you can use the res.redirect to do that for you
   res.redirect("/");
 });
 
-// NOTE: '/' matches ANYTHING. For less specific route patterns, you probably want to put this middleware last, unless you want it to run whatever the request URL is, then call next() to pass it to another route matcher.
-app.use("/", (req, res, next) => {
+// Match-all (If none of the above middlewares actually matches anything)
+app.use((req, res, next) => {
   res.send("<h1>Hello from Express!</h1>");
 });
 
