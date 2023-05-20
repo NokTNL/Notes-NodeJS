@@ -1,2 +1,2 @@
 // Choose which folder to run
-import "./0-basics/app.js";
+import "./10-routes/app.js";

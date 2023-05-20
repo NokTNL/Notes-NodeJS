@@ -8,9 +8,9 @@ const app = express();
 //  - req
 //  - res
 //  - next: this is a function you call to pass the request to the NEXT middleware in line (according to the order you call `app.use`)
-// If you don't call `next()` at the end of the middleware, the request will be STUCK and never finishes
 
 // Middleware #1:
+// !!! Note: If you don't call `next()` at the end of this middleware, the request will never be passed to the next middleware. But we didn't send the response either, so the request will be STUCK here.
 app.use((req, res, next) => {
   console.log("In the middleware");
   next();
@@ -23,7 +23,13 @@ app.use((req, res, next) => {
   // You can use the `res.send` method to send HTML directly without calling res.setHeaders, res.write, res.end, etc.
   // By default, if you pass in a string to `send`, "Content-Type" will be set to 'text/html'
   res.send("<h1>Hello from Express!</h1>");
-  // !!! NO NEED to call next() once you have called res.send()
+  // You can still call next() here, if you have another middleware to pass to, but res.send will already end the response for you
+  next();
+});
+
+// Middleware #3:
+app.use(() => {
+  console.log("in third middleware");
 });
 
 // `app` is a valid route handler as well:
