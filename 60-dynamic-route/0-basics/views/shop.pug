@@ -1,0 +1,30 @@
+//- To generate a pug template in VS Code, simply type `html5` in a .pug file
+//- Pug takes whitespace indentation into account (like Python). Also, tags are always self-closing
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        //- To use render dynamic content in an HTML tag, use #{}
+        title My Shop
+        link(rel="stylesheet", href="/styles.css")
+    body
+        header
+            nav
+                ul
+                    li
+                        a(href="/", aria-current="page") Shop
+                    li
+                        a(href="/add-product") Add Product
+        main
+            h1 My Products
+            //- If not inside an HTML tag, simply use the variable name
+            if products.length > 0
+                //- Use each...in to loop an array
+                ul.product-list
+                    each product in products
+                        li 
+                            a(href=`/products/${product.id}`) #{product.name}
+            else
+                p (No products)
