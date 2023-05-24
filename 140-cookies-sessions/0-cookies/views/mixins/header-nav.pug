@@ -1,0 +1,10 @@
+mixin header-nav(current)
+    header
+    nav
+        ul
+            li
+                a(href="/", aria-current=(current === '/' ? 'page' : undefined)) Shop
+            li
+                a(href="/add-product", aria-current=(current === '/add-product' ? 'page' : undefined)) Add Product
+            li.end
+                a(href='/login', aria-current=(current === '/login' ? 'page' : undefined)) Login
