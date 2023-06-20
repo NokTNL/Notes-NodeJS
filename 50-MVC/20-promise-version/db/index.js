@@ -1,4 +1,5 @@
 import { fileURLToPath } from "url";
+// Use `fs/promises` instead of `fs`
 import fs from "fs/promises";
 
 const path = fileURLToPath(new URL("products.json", import.meta.url));

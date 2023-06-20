@@ -4,6 +4,8 @@ import adminRoutes from "./routes/admin.js";
 import shopRoutes from "./routes/shop.js";
 import { fileURLToPath } from "url";
 
+// See `db/index.js` on how to use Promise-based file system operations
+
 const app = express();
 
 app.set("view engine", "pug");
