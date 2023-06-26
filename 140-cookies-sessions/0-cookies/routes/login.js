@@ -2,11 +2,6 @@ import express from "express";
 
 const router = express.Router();
 
-router.get("/login", (req, res, next) => {
-  // You can get the "Cookie" header from the request:
-  console.log(req.get("Cookie")); // loggedIn=true
-  res.render("login");
-});
 router.post("/login", (req, res, next) => {
   // A COOKIE is a piece of info returned by the server. It tells the browser to persist it and attach it to every later request back to the server.
   //  - Full set of cookies values: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
@@ -16,6 +11,12 @@ router.post("/login", (req, res, next) => {
   // You can use `res.setHeader` to set cookies in the response:
   res.setHeader("Set-Cookie", "loggedIn=true; Secure; HttpOnly; Max-Age=10");
   res.redirect("/");
+});
+
+router.get("/login", (req, res, next) => {
+  // You can get the "Cookie" header from the request:
+  console.log(req.get("Cookie")); // loggedIn=true
+  res.render("login");
 });
 
 export default router;
