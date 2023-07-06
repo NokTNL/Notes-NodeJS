@@ -1,0 +1,39 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+nav > ul {
+    margin: 0;
+    padding: 0;
+    background-color: pink;
+    display: flex;
+}
+
+nav li {
+    list-style-type: none;
+    padding: 0;
+}
+nav a {
+    display: inline-block;
+    padding: 16px 24px;
+    text-decoration: none;
+    color: black;
+    font-weight: 700;
+}
+nav a[aria-current=page] {
+    background-color: white;
+}
+nav a:hover {
+    background-color: white;
+}
+nav a:active {
+    background-color: rgb(235, 141, 193);
+}
+
+main {
+    padding: 24px;
+}
+
+
