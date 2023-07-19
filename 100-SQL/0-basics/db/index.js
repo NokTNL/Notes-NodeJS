@@ -12,7 +12,7 @@ const pool = mysql.createPool({
 });
 
 // To make a query to the database, pass in a SQL query string into `pool.execute()`
-// `SELECT * FROM products` means "select all columns from the `products` table"
+// `SELECT * FROM products` means "select all columns (= fields) from the `products` table"
 pool
   .execute("SELECT * FROM products")
   .then((result) => {
