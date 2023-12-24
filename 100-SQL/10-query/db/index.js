@@ -8,7 +8,7 @@ const pool = mysql.createPool({
   host: "localhost",
   user: "root",
   database: "hello-world",
-  password: process.env.password,
+  password: process.env.MYSQL_PASSWORD,
 });
 
 export async function getProducts() {

@@ -2,14 +2,13 @@
 
 - Install:
   - 1. MySQL Community Server: https://dev.mysql.com/downloads/mysql/
-    - Choose Legacy Password Encryption when installing, because NodeJS does not support Strong Password Encryption.
   - 2. (Only for Mac) MySQL Workbench: https://dev.mysql.com/downloads/workbench/
   - 3. `npm install mysql2` so that NodeJS can interact with MySQL
 - Open MySQL Workbench, there should already be an instance of MySQL running. Click on the instance to look inside
 
 # Creating Schemas & Tables
 
-- Find "Schema Editor" to create a new schema. Click "Apply" and you will see a new schema created on the left
+- Find "Schema Editor" (the "Column plus" icon on the top bar) to create a new schema. Click "Apply" and you will see a new schema created on the left
 - Inside the new schema, select "Tables", right-click and select "Create Table".
   - `Name` is the name of the table, e.g. `products`
   - The rows below are different COLUMNS of the table; they hold key-value pairs for the table.
@@ -28,7 +27,6 @@
       - Not Null (`NN`) ✅
     - Column `description` can be
       - Datatype `LONGTEXT` (this can hold much longer strings)
-      - Not Null (`NN`) ✅
     - etc...
 - Click "Apply" to create the table
 

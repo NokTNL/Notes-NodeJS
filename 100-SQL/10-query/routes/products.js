@@ -10,6 +10,7 @@ router.get("/products/:id", async (req, res, next) => {
     res.send(
       ProductView({
         title: product.title,
+        description: product.description,
       })
     );
   } catch (err) {
