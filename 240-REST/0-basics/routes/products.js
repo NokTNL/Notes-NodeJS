@@ -1,15 +1,13 @@
 import express from "express";
 import { getProducts, pushProduct } from "../db/index.js";
+import { productSchema } from "../models/products.js";
 
 const router = express.Router();
 
 router.post("/products/", async (req, res, next) => {
-  // 🤯 Needs validation, very dangerous
-  const productWithId = await pushProduct({
-    title: req.body.title,
-    price: req.body.price,
-    description: req.body.description,
-  });
+  const newProductSchema = productSchema.omit({ id: true });
+  const newProduct = newProductSchema.parse(req.body);
+  const productWithId = await pushProduct(newProduct);
 
   // 201 = Created
   res.status(201).send(productWithId);

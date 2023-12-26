@@ -1,8 +1,9 @@
-/**
- * @typedef {{id: number, title: string, price: number, description: string}} Product
- */
-
 import mysql from "mysql2/promise";
+import { productSchema } from "../models/products.js";
+
+/**
+ * @typedef {import("../models/products.js").Product} Product
+ */
 
 const pool = mysql.createPool({
   host: "localhost",
@@ -12,12 +13,8 @@ const pool = mysql.createPool({
 });
 
 export async function getProducts() {
-  /**
-   * @type {[Product[], mysql.FieldPacket[]]}
-   */
-  // @ts-ignore
-  const [products, fieldData] = await pool.execute("SELECT * FROM products");
-  return products;
+  const [products] = await pool.execute("SELECT * FROM products");
+  return productSchema.parse(products);
 }
 
 /**
